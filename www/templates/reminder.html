@@ -1,0 +1,32 @@
+<ion-view>
+  <ion-header-bar>
+    <!--title.header is a scope opject that is set by NG-MODEL of the input box below-->
+    <h1 class="title">{{title.header}}</h1>
+  </ion-header-bar>
+  <ion-content>
+    <!--repeat the div for items in pageDisplay-->
+    <div ng-repeat="div in pageDisplay">
+      <!--set a h2 tag for each div-->
+      <h2>{{div.name}}</h2>
+      <!--only show below element if array element is = to "Description"-->
+      <textarea ng-model="title.desc" ng-if="div.name == 'Description'"></textarea>
+        <form>
+          <!--only show below element if array element is = to "Title"-->
+          <input id="input" ng-if="div.name == 'Title'" type="text" ng-model="title.header"></input>
+        </form>
+        <!--only show below div element if array element is = to "Priority"-->
+      <div ng-if="div.name == 'Priority'">
+        <ion-radio ng-model="title.priority" ng-change="priorityCh(title.priority)" ng-value="'High'">High</ion-radio>
+        <ion-radio ng-model="title.priority" ng-change="priorityCh(title.priority)" ng-value="'Medium'">Medium</ion-radio>
+        <ion-radio ng-model="title.priority" ng-change="priorityCh(title.priority)" ng-value="'Low'">Low</ion-radio>
+      </div>
+      <!--only show below element if array element is = to "Complete"-->
+      <ion-toggle ng-if="div.name == 'Complete'" ng-model="title.complete" ng-change="toggleChange(title.complete)" ng-checked="false" toggle-class="toggle-calm">{{div.name}}</ion-toggle>
+    </div>
+    <!--only show below button if saveTF varibale = true-->
+    <button ng-if="saveTF" id="save" ng-click="save(this)" class="button button-positive">Save</button>
+    <!--only show below button(S) if saveTF varibale = true-->
+    <button ng-if="!saveTF" id="save" ng-click="update(this)" class="button button-positive">Update</button>
+    <button ng-if="!saveTF"id="save" ng-click="delete()" class="button button-assertive">Delete</button>
+  </ion-content>
+</ion-view>
